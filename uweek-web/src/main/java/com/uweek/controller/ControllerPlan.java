@@ -126,7 +126,7 @@ public class ControllerPlan implements Serializable {
         return plans;
     }
 
-    public void setCategorys(List<Plan> plans) {
+    public void setPlans(List<Plan> plans) {
         this.plans = plans;
     }
 

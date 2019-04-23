@@ -4,6 +4,7 @@
     <jta-data-source>java:/uWeekMySqlDS</jta-data-source>
     <class>com.uweek.entity.Plan</class>
     <class>com.uweek.entity.Dish</class>
+    <class>com.uweek.entity.Ingredient</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
