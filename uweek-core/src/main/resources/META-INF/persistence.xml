@@ -3,6 +3,7 @@
   <persistence-unit name="uweekvisorPU" transaction-type="JTA">
     <jta-data-source>java:/MySqlDS</jta-data-source>
     <class>com.uweek.entity.Plan</class>
+    <class>com.uweek.entity.Dish</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
