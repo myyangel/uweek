@@ -100,33 +100,34 @@ public class ControllerPlan implements Serializable {
     public void selectPlan(SelectEvent e) {
         this.planSelect = (Plan) e.getObject();
     }
-    
-    private void clearForm() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    public void clearForm() {
+        this.plan = new Plan();
+        this.planSelect = null;
     }
-    
+
     public Plan getPlan() {
-		return plan;
-	}
+        return plan;
+    }
 
-	public void setPlan(Plan plan) {
-		this.plan = plan;
-	}
+    public void setPlan(Plan plan) {
+        this.plan = plan;
+    }
 
-	public Plan getPlanSelect() {
-		return planSelect;
-	}
+    public Plan getPlanSelect() {
+        return planSelect;
+    }
 
-	public void setPlanSelect(Plan planSelect) {
-		this.planSelect = planSelect;
-	}
+    public void setPlanSelect(Plan planSelect) {
+        this.planSelect = planSelect;
+    }
 
-	public List<Plan> getPlans() {
-		return plans;
-	}
+    public List<Plan> getPlans() {
+        return plans;
+    }
 
-	public void setCategorys(List<Plan> plans) {
-		this.plans = plans;
-	}
+    public void setCategorys(List<Plan> plans) {
+        this.plans = plans;
+    }
 
 }

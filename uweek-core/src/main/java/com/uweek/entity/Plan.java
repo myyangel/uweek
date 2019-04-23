@@ -11,21 +11,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author arman
  */
 @Entity
+@Table(name = "plan")
 public class Plan implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @Column(name = "nPlan", length = 10, nullable = false)
-    private String nPlan;
+    @Column(name = "name", length = 15, nullable = false)
+    private String name;
 
     public Integer getId() {
         return id;
@@ -35,12 +37,12 @@ public class Plan implements Serializable {
         this.id = id;
     }
 
-    public String getnPlan() {
-        return nPlan;
+    public String getName() {
+        return name;
     }
 
-    public void setnPlan(String nPlan) {
-        this.nPlan = nPlan;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
