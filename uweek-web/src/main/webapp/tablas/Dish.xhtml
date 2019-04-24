@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <head></head>
+    <body>
+        <ui:composition template="/WEB-INF/templates/master.xhtml">
+            <ui:define name="content">
+                <h:form id="frm">
+                    <p:growl id="men" />
+                    <p:toolbar>
+                        <f:facet name = "right">
+                            <p:commandButton value="Nuevo" icon="ui-icon-document"
+                                             actionListener="#{controllerDish.clearForm()}" update="@form"/>
+                            <p:commandButton value="Guardar" icon="ui-icon-disk"
+                                             process="@this :frm:panGriDish"
+                                             actionListener="#{controllerDish.saveDish()}"
+                                             update=":frm:men :frm:datTabDish :frm:panGriDish" />
+                            <p:commandButton value="Editar" icon="ui-icon-pencil"
+                                             process="@this"
+                                             actionListener="#{controllerDish.editDish()}"
+                                             update=":frm:men :frm:panGriDish" />
+                        </f:facet>
+                    </p:toolbar>
+
+                    <p:panelGrid id="panGriDish" columns="2" style="width:100%">
+
+                        <p:outputLabel value="Plan" for="txtPlan" />
+                        <p:inputText id="txtPlan" required="true" maxlength="50"
+                                     value="#{controllerDish.dish.plan}" />
+
+
+                        <p:outputLabel value="Nombre:" for="txtName" />
+                        <p:inputText id="txtName" required="true" maxlength="15"
+                                     value="#{controllerDish.dish.name}" />
+
+                        <p:outputLabel value="Descripción:" for="txtDescription" />
+                        <p:inputText id="txtDescription" required="false" maxlength="50"
+                                     value="#{controllerDish.dish.description}" />
+
+                        <p:outputLabel value="Receta" for="txtRecipe" />
+                        <p:inputText id="txtRecipe" required="false" maxlength="100"
+                                     value="#{controllerDish.dish.recipe}" />
+
+
+                    </p:panelGrid>
+                    <br></br>
+                    <p:dataTable id="datTabDish"
+                                 emptyMessage="No existen platos registrados"
+                                 value="#{controllerDish.dishes}" var="dish"
+                                 paginator="true" rows="10" selectionMode="single"
+                                 rowKey="#{dish.id}">
+                        <f:facet name="header">
+                            <p:outputLabel value="Lista de platos" />
+                        </f:facet>
+                        <p:ajax event="rowSelect"
+                                listener="#{controllerDish.selectDish}" />
+
+
+                        <p:column headerText="Id">
+                            <p:outputLabel value="#{dish.id}" />
+                        </p:column>
+                        <p:column headerText="Plan">
+                            <p:outputLabel value="#{dish.plan}" />
+                        </p:column>
+                        <p:column headerText="Nombre">
+                            <p:outputLabel value="#{dish.name}" />
+                        </p:column>
+                        <p:column headerText="Descripción">
+                            <p:outputLabel value="#{dish.description}" />
+                        </p:column>
+                        <p:column headerText="Receta">
+                            <p:outputLabel value="#{dish.recipe}" />
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
