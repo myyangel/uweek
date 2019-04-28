@@ -1,82 +1,82 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head>
-<body>
+    <body>
 
-	<ui:composition template="/WEB-INF/templates/master.xhtml">
-		<ui:define name="content">
-			<h:form id="frm">
-				<p:growl id="men" />
-				<p:toolbar>
-					<f:facet name="right">
-						<p:commandButton value="Nuevo" icon="ui-icon-document"
-                                                                 actionListener="#{controllerDish.clearForm()}" 
-							update="@form"/>
-						<p:commandButton value="Guardar" icon="ui-icon-disk"
-							process="@this :frm:panGriPlato"
-                                                        actionListener="#{controllerDish.saveDish()}"
-							update=":frm:men datTabPlato :frm:panGriPlato" />
-						
-						<p:commandButton value="Editar" icon="ui-icon-pencil"
-							process="@this"
-                                                        actionListener="#{controllerDish.editDish()}"
-							update=":frm:men :frm:panGriPlato" />
-						
-					</f:facet>
-				</p:toolbar>
-				<p:panelGrid id="panGriPlato" columns="2" style="width:100%">
-					<p:outputLabel value="Plan:" for="cmbPlan" />
-					<p:selectOneMenu id="cmbPlan" required="true" effect="drop"
-						value="#{controllerDish.plan}"
-						converter="omnifaces.SelectItemsConverter">
-						<f:selectItem itemLabel="Seleccione una opción"
-							noSelectionOption="true" itemValue="" />
-                                                <f:selectItems value="#{controllerDish.plans}"
-                                                               var="Plan" itemLabel="#{Plan.name}" itemValue="#{Plan}" />
-					</p:selectOneMenu>
-					<p:outputLabel value="Nombre:" for="txtNomPlato" />
-					<p:inputText id="txtNomPlato" required="true" maxlength="25"
-                                                     value="#{controllerDish.dish.name}" />
-					<p:outputLabel value="Descripción:" for="spiDescriptionPlato" />
-					<p:inputText id="spiDescriptionPlato" 
-                                                     value="#{controllerDish.dish.description}" />
-                                        <p:outputLabel value="Receta:" for="spiRecetaPlato" />
-					<p:inputText id="spiRecetaPlato" 
-                                                     value="#{controllerDish.dish.recipe}" />
-				</p:panelGrid>
-				<br></br>
-				<p:dataTable id="datTabPlato"
-					emptyMessage="No existen platos registrados"
-                                        value="#{controllerDish.dishes}" var="dish" paginator="true"
-                                        rows="10" selectionMode="single" rowKey="#{dish.id}">
-					<f:facet name="header">
-						<p:outputLabel value="Lista de Platos" />
-					</f:facet>
-					<p:ajax event="rowSelect"
-                                                listener="#{controllerDish.selectDish}" />
-					<p:column headerText="id">
-                                            <p:outputLabel value="#{dish.id}" />
-					</p:column>
-					<p:column headerText="Nombre">
-                                            <p:outputLabel value="#{dish.name}" />
-					</p:column>
-					<p:column headerText="Descripción">
-                                            <p:outputLabel value="#{dish.description}" />
-					</p:column>
-                                        <p:column headerText="Recipe">
-                                            <p:outputLabel value="#{dish.recipe}" />
-					</p:column>
-					<p:column headerText="Plan">
-                                            <p:outputLabel value="#{dish.plan.name}" />
-					</p:column>
-				</p:dataTable>
-			</h:form>
-		</ui:define>
-	</ui:composition>
-</body>
+        <ui:composition template="/WEB-INF/templates/master.xhtml">
+            <ui:define name="pageTitle">Platos</ui:define>
+            <ui:define name="content">
+                <h:form id="frm">
+                    <p:growl id="men" />
+                    <p:toolbar>
+                        <f:facet name="right">
+                            <p:commandButton value="Nuevo" icon="ui-icon-document"
+                                             actionListener="#{controllerDish.clearForm()}" 
+                                             update="@form"/>
+                            <p:commandButton value="Guardar" icon="ui-icon-disk"
+                                             process="@this :frm:panGriPlato"
+                                             actionListener="#{controllerDish.saveDish()}"
+                                             update=":frm:men datTabPlato :frm:panGriPlato" />
+
+                            <p:commandButton value="Editar" icon="ui-icon-pencil"
+                                             process="@this"
+                                             actionListener="#{controllerDish.editDish()}"
+                                             update=":frm:men :frm:panGriPlato" />
+
+                        </f:facet>
+                    </p:toolbar>
+                    <p:panelGrid id="panGriPlato" columns="2" style="width:100%">
+                        <p:outputLabel value="Plan:" for="cmbPlan" />
+                        <p:selectOneMenu id="cmbPlan" required="true" effect="drop"
+                                         value="#{controllerDish.plan}"
+                                         converter="omnifaces.SelectItemsConverter">
+                            <f:selectItem itemLabel="Seleccione una opción"
+                                          noSelectionOption="true" itemValue="" />
+                            <f:selectItems value="#{controllerDish.plans}"
+                                           var="Plan" itemLabel="#{Plan.name}" itemValue="#{Plan}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Nombre:" for="txtNomPlato" />
+                        <p:inputText id="txtNomPlato" required="true" maxlength="25"
+                                     value="#{controllerDish.dish.name}" />
+                        <p:outputLabel value="Descripción:" for="spiDescriptionPlato" />
+                        <p:inputText id="spiDescriptionPlato" 
+                                     value="#{controllerDish.dish.description}" />
+                        <p:outputLabel value="Receta:" for="spiRecetaPlato" />
+                        <p:inputText id="spiRecetaPlato" 
+                                     value="#{controllerDish.dish.recipe}" />
+                    </p:panelGrid>
+                    <br></br>
+                    <p:dataTable id="datTabPlato"
+                                 emptyMessage="No existen platos registrados"
+                                 value="#{controllerDish.dishes}" var="dish" paginator="true"
+                                 rows="10" selectionMode="single" rowKey="#{dish.id}">
+                        <f:facet name="header">
+                            <p:outputLabel value="Lista de Platos" />
+                        </f:facet>
+                        <p:ajax event="rowSelect"
+                                listener="#{controllerDish.selectDish}" />
+                        <p:column headerText="id">
+                            <p:outputLabel value="#{dish.id}" />
+                        </p:column>
+                        <p:column headerText="Nombre">
+                            <p:outputLabel value="#{dish.name}" />
+                        </p:column>
+                        <p:column headerText="Descripción">
+                            <p:outputLabel value="#{dish.description}" />
+                        </p:column>
+                        <p:column headerText="Recipe">
+                            <p:outputLabel value="#{dish.recipe}" />
+                        </p:column>
+                        <p:column headerText="Plan">
+                            <p:outputLabel value="#{dish.plan.name}" />
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
 </html>

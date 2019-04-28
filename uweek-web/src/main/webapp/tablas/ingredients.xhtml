@@ -1,69 +1,69 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head>
-<body>
+    <body>
 
-	<ui:composition template="/WEB-INF/templates/master.xhtml">
-		<ui:define name="content">
-			<h:form id="frm">
-				<p:growl id="men" />
-				<p:toolbar>
-					<f:facet name="right">
-						<p:commandButton value="Nuevo" icon="ui-icon-document"
-                                                                 actionListener="#{controllerIngredient.clearForm()}" update="@form" />
-							
-						<p:commandButton value="Guardar" icon="ui-icon-disk"
-							process="@this :frm:panGriIngredient"
-                                                        actionListener="#{controllerIngredient.saveIngredient()}"
-							update=":frm:men :frm:datTabIngredient :frm:panGriIngredient" />
-							
-							
-						<p:commandButton value="Editar" icon="ui-icon-pencil"
-							process="@this"
-                                                        actionListener="#{controllerIngredient.editIngredient()}"
-							update=":frm:men :frm:panGriIngredient" />
-					</f:facet>
-				</p:toolbar>
-				<p:panelGrid id="panGriIngredient" columns="2" style="width:100%">
-					<p:outputLabel value="Nombre:" for="txtName" />
-					<p:inputText id="txtName" required="true" maxlength="15"
-                                                     value="#{controllerIngredient.ingredient.name}" />
-                                        
-                                        <p:outputLabel value="Descripción:" for="txtDescription" />
-					<p:inputText id="txtDescription" required="false" maxlength="50"
-                                                     value="#{controllerIngredient.ingredient.description}" />
-				</p:panelGrid>
-				<br></br>
+        <ui:composition template="/WEB-INF/templates/master.xhtml">
+            <ui:define name="pageTitle">Ingredientes</ui:define>
+            <ui:define name="content">
+                <h:form id="frm">
+                    <p:growl id="men" />
+                    <p:toolbar>
+                        <f:facet name="right">
+                            <p:commandButton value="Nuevo" icon="ui-icon-document"
+                                             actionListener="#{controllerIngredient.clearForm()}" update="@form" />
 
-				<p:dataTable id="datTabIngredient"
-					emptyMessage="No existen ingredientes registrados"
-                                        value="#{controllerIngredient.ingredients}" var="ingredient"
-					paginator="true" rows="10" selectionMode="single"
-                                        rowKey="#{ingredient.id}">
-					<f:facet name="header">
-						<p:outputLabel value="Lista de Ingredientes" />
-					</f:facet>
-					<p:ajax event="rowSelect"
-                                                listener="#{controllerIngredient.selectIngredient}" />
+                            <p:commandButton value="Guardar" icon="ui-icon-disk"
+                                             process="@this :frm:panGriIngredient"
+                                             actionListener="#{controllerIngredient.saveIngredient()}"
+                                             update=":frm:men :frm:datTabIngredient :frm:panGriIngredient" />
 
-					<p:column headerText="Id">
-                                            <p:outputLabel value="#{ingredient.id}" />
-					</p:column>
-					<p:column headerText="Nombre">
-                                            <p:outputLabel value="#{ingredient.name}" />
-					</p:column>
-                                        <p:column headerText="Descripción">
-                                            <p:outputLabel value="#{ingredient.description}" />
-					</p:column>
-				</p:dataTable>
-			</h:form>
-		</ui:define>
-	</ui:composition>
 
-</body>
+                            <p:commandButton value="Editar" icon="ui-icon-pencil"
+                                             process="@this"
+                                             actionListener="#{controllerIngredient.editIngredient()}"
+                                             update=":frm:men :frm:panGriIngredient" />
+                        </f:facet>
+                    </p:toolbar>
+                    <p:panelGrid id="panGriIngredient" columns="2" style="width:100%">
+                        <p:outputLabel value="Nombre:" for="txtName" />
+                        <p:inputText id="txtName" required="true" maxlength="15"
+                                     value="#{controllerIngredient.ingredient.name}" />
+
+                        <p:outputLabel value="Descripción:" for="txtDescription" />
+                        <p:inputText id="txtDescription" required="false" maxlength="50"
+                                     value="#{controllerIngredient.ingredient.description}" />
+                    </p:panelGrid>
+                    <br></br>
+
+                    <p:dataTable id="datTabIngredient"
+                                 emptyMessage="No existen ingredientes registrados"
+                                 value="#{controllerIngredient.ingredients}" var="ingredient"
+                                 paginator="true" rows="10" selectionMode="single"
+                                 rowKey="#{ingredient.id}">
+                        <f:facet name="header">
+                            <p:outputLabel value="Lista de Ingredientes" />
+                        </f:facet>
+                        <p:ajax event="rowSelect"
+                                listener="#{controllerIngredient.selectIngredient}" />
+
+                        <p:column headerText="Id">
+                            <p:outputLabel value="#{ingredient.id}" />
+                        </p:column>
+                        <p:column headerText="Nombre">
+                            <p:outputLabel value="#{ingredient.name}" />
+                        </p:column>
+                        <p:column headerText="Descripción">
+                            <p:outputLabel value="#{ingredient.description}" />
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </body>
 </html>
