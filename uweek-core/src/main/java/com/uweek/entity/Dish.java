@@ -22,17 +22,17 @@ public class Dish implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column (name = "name" , length = 80, nullable = false)
+    @Column (name = "name" , length = 25, nullable = false)
     private String name;
     
-    @Column (name = "description" , length = 80, nullable = false)
+    @Column (name = "description" , length = 140, nullable = true)
     private String description;
     
-    @Column (name = "recipe" , length = 80, nullable = false)
+    @Column (name = "recipe" , length = 200, nullable = true)
     private String recipe;
 
     @ManyToOne
-    @JoinColumn (name = "plan")
+    @JoinColumn (name = "plan_id")
     private Plan plan;
     
     public Integer getId() {

@@ -2,7 +2,6 @@ package com.uweek.business.implementation;
 
 import com.uweek.business.IServiceDish;
 import com.uweek.entity.Dish;
-import com.uweek.entity.Ingredient;
 import javax.inject.Inject;
 import javax.inject.Named;
 
