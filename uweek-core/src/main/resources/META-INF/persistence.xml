@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="">
   <persistence-unit name="uweekvisorPU" transaction-type="JTA">
-    <jta-data-source>java:/uWeekMySqlDS</jta-data-source>
+    <jta-data-source>java:/uweekMySqlDS</jta-data-source>
     <class>com.uweek.entity.Plan</class>
     <class>com.uweek.entity.Dish</class>
     <class>com.uweek.entity.Ingredient</class>
+    <class>com.uweek.entity.User</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>

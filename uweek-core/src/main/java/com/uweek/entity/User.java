@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "customers")
+@Table(name = "user")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -24,14 +24,17 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name = "name", length = 80, nullable = false)
+	@Column(name = "name", length = 20, nullable = false)
 	private String name;
 
-	@Column(name = "address", length = 120, nullable = false)
+	@Column(name = "address", length = 30, nullable = false)
 	private String address;
 
 	@Column(name = "birth", length = 8, nullable = false)
 	private String birth;
+        
+        @Column (name= "password", length=20, nullable=false)
+        private String password;
 
 
 	public int getId() {
@@ -65,4 +68,11 @@ public class User implements Serializable {
 	public void setBirth(String birth) {
 		this.birth = birth;
 	}
+        public String getPassword(){
+                    return password;
+        }
+        
+        public void setPassword(String password){
+                this.password = password;
+        }
 }

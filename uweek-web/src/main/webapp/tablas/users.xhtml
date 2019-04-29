@@ -15,34 +15,38 @@
 				<p:toolbar>
 					<f:facet name="right">
 						<p:commandButton value="Nuevo" icon="ui-icon-document"
-							actionListener="#{userController.resetForm()}" update="@form" />
+							actionListener="#{controllerUser.resetForm()}" update="@form" />
 						<p:commandButton value="Guardar" icon="ui-icon-disk"
 							process="@this :frmGen:panGriCus"
-							actionListener="#{userController.saveUser()}"
+							actionListener="#{controllerUser.saveUser()}"
 							update=":frmGen:menGen :frmGen:datTabCus :frmGen:panGriCus"
 							ajax="false" />
 
 						<p:commandButton value="Editar" icon="ui-icon-pencil"
 							process="@this"
-							actionListener="#{userController.editUser()}"
+							actionListener="#{controllerUser.editUser()}"
 							update=":frmGen:menGen :frmGen:panGriCus"/>
 					</f:facet>
 					<f:facet name="left">
 						<p:outputLabel value="Usuarios" />
 					</f:facet>
 				</p:toolbar>
-				<p:panelGrid id="panGriCus" columns="6" style="width:100%">
+				<p:panelGrid id="panGriCus" columns="4" style="width:100%">
 					<p:outputLabel value="Nombre:" for="txtNombre" />
 					<p:inputText id="txtNombre" required="true" style="width:90%"
-						maxlength="50" value="#{userController.user.name}" />
+                                                     maxlength="50" value="#{controllerUser.user.name}" />
 
 					<p:outputLabel value="Direccion:" for="txtDireccion" />
 					<p:inputText id="txtDireccion" required="true" style="width:90%"
-						maxlength="200" value="#{userController.user.address}" />
+						maxlength="200" value="#{controllerUser.user.address}" />
                                         
                                         <p:outputLabel value="Nacimiento:" for="txtNacimiento" />
 					<p:inputText id="txtNacimiento" required="true" style="width:90%"
-                                                     maxlength="8" value="#{userController.user.birth}" />
+                                                     maxlength="8" value="#{controllerUser.user.birth}" />
+                                        
+                                        <p:outputLabel value="Contrasena:" for="txtPassword" />
+					<p:inputText id="txtPassword" required="true" style="width:90%"
+                                                     maxlength="8" value="#{controllerUser.user.password}" />
 					
 					
 					
@@ -61,18 +65,21 @@
 
 				<p:dataTable id="datTabCus"
 					emptyMessage="No existen usuarios registrados"
-					value="#{userController.users}" var="c" paginator="true"
+					value="#{controllerUser.users}" var="c" paginator="true"
 					rows="10" selectionMode="single" rowKey="#{c.id}">
 					<f:facet name="header">
 						<p:outputLabel value="Lista de Usuarios" />
 					</f:facet>
 					<p:ajax event="rowSelect"
-						listener="#{userController.selecUser}" />
+						listener="#{controllerUser.selecUser}" />
 					<p:column headerText="Id">
 						<p:outputLabel value="#{c.id}" />
 					</p:column>
 					<p:column headerText="Nombre">
 						<p:outputLabel value="#{c.name}" />
+					</p:column>
+                                        <p:column headerText="Contrasena">
+                                            <p:outputLabel value="#{c.password}" />
 					</p:column>
 					<p:column headerText="Fecha de Nacimiento">
 						<p:outputLabel value="#{c.birth}" />
