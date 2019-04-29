@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="/WEB-INF/templates/master.xhtml">
+            <ui:define name="pageTitle">Permisos</ui:define>
+            <ui:define name="content">
+                <h:form id="frm">
+                    <p:growl id="men" />
+                    <p:toolbar>
+                        <f:facet name="right">
+                            <p:commandButton value="Nuevo" icon="ui-icon-document"
+                                             actionListener="#{controllerPermission.clearForm()}" 
+                                             update="@form"/>
+                            <p:commandButton value="Guardar" icon="ui-icon-disk"
+                                             process="@this :frm:panGriPlato"
+                                             actionListener="#{controllerPermission.savePermission()}"
+                                             update=":frm:men datTabPlato :frm:panGriPlato" />
+
+                            <p:commandButton value="Editar" icon="ui-icon-pencil"
+                                             process="@this"
+                                             actionListener="#{controllerPermission.editPermission()}"
+                                             update=":frm:men :frm:panGriPlato" />
+
+                        </f:facet>
+                    </p:toolbar>
+                    <p:panelGrid id="panGriPlato" columns="2" style="width:100%">
+                        <p:outputLabel value="Role:" for="cmbPlan" />
+                        <p:selectOneMenu id="cmbPlan" required="true" effect="drop"
+                                         value="#{controllerPermission.role}"
+                                         converter="omnifaces.SelectItemsConverter">
+                            <f:selectItem itemLabel="Seleccione una opción"
+                                          noSelectionOption="true" itemValue="" />
+                            <f:selectItems value="#{controllerPermission.roles}"
+                                           var="Role" itemLabel="#{Role.name}" itemValue="#{Role}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Nombre:" for="txtNomPlato" />
+                        <p:inputText id="txtNomPlato" required="true" maxlength="25"
+                                     value="#{controllerPermission.permission.name}" />
+                    </p:panelGrid>
+                    <br></br>
+                    <p:dataTable id="datTabPlato"
+                                 emptyMessage="No existen permisos registrados"
+                                 value="#{controllerPermission.permissions}" var="permission" paginator="true"
+                                 rows="10" selectionMode="single" rowKey="#{permission.id}">
+                        <f:facet name="header">
+                            <p:outputLabel value="Lista de Permisos" />
+                        </f:facet>
+                        <p:ajax event="rowSelect"
+                                listener="#{controllerPermission.selectPermission}" />
+                        <p:column headerText="id">
+                            <p:outputLabel value="#{permission.id}" />
+                        </p:column>
+                        <p:column headerText="Nombre">
+                            <p:outputLabel value="#{permission.name}" />
+                        </p:column>
+                        <p:column headerText="Rol">
+                            <p:outputLabel value="#{permission.role.name}" />
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
