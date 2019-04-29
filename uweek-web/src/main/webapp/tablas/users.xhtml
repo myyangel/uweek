@@ -1,98 +1,98 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head>
-<body>
+    <h:head></h:head>
+    <body>
 
-	<ui:composition template="/WEB-INF/templates/master.xhtml">
-		<ui:define name="content">
-			<h:form id="frmGen" enctype="multipart/form-data">
-				<p:growl id="menGen" />
-				<p:toolbar>
-					<f:facet name="right">
-						<p:commandButton value="Nuevo" icon="ui-icon-document"
-							actionListener="#{controllerUser.resetForm()}" update="@form" />
-						<p:commandButton value="Guardar" icon="ui-icon-disk"
-							process="@this :frmGen:panGriCus"
-							actionListener="#{controllerUser.saveUser()}"
-							update=":frmGen:menGen :frmGen:datTabCus :frmGen:panGriCus"
-							ajax="false" />
+        <ui:composition template="/WEB-INF/templates/master.xhtml">
+            <ui:define name="pageTitle">Usuarios</ui:define>
+            <ui:define name="content">
+                <h:form id="frmGen" enctype="multipart/form-data">
+                    <p:growl id="menGen" />
+                    <p:toolbar>
+                        <f:facet name="right">
+                            <p:commandButton value="Nuevo" icon="ui-icon-document"
+                                             actionListener="#{controllerUser.resetForm()}" update="@form" />
+                            <p:commandButton value="Guardar" icon="ui-icon-disk"
+                                             process="@this :frmGen:panGriCus"
+                                             actionListener="#{controllerUser.saveUser()}"
+                                             update=":frmGen:menGen :frmGen:datTabCus :frmGen:panGriCus"
+                                             ajax="false" />
 
-						<p:commandButton value="Editar" icon="ui-icon-pencil"
-							process="@this"
-							actionListener="#{controllerUser.editUser()}"
-							update=":frmGen:menGen :frmGen:panGriCus"/>
-					</f:facet>
-					<f:facet name="left">
-						<p:outputLabel value="Usuarios" />
-					</f:facet>
-				</p:toolbar>
-				<p:panelGrid id="panGriCus" columns="4" style="width:100%">
-					<p:outputLabel value="Nombre:" for="txtNombre" />
-					<p:inputText id="txtNombre" required="true" style="width:90%"
-                                                     maxlength="50" value="#{controllerUser.user.name}" />
+                            <p:commandButton value="Editar" icon="ui-icon-pencil"
+                                             process="@this"
+                                             actionListener="#{controllerUser.editUser()}"
+                                             update=":frmGen:menGen :frmGen:panGriCus"/>
+                        </f:facet>
+                        <f:facet name="left">
+                            <p:outputLabel value="Usuarios" />
+                        </f:facet>
+                    </p:toolbar>
+                    <p:panelGrid id="panGriCus" columns="4" style="width:100%">
+                        <p:outputLabel value="Nombre:" for="txtNombre" />
+                        <p:inputText id="txtNombre" required="true" style="width:90%"
+                                     maxlength="20" value="#{controllerUser.user.name}" />
 
-					<p:outputLabel value="Direccion:" for="txtDireccion" />
-					<p:inputText id="txtDireccion" required="true" style="width:90%"
-						maxlength="200" value="#{controllerUser.user.address}" />
-                                        
-                                        <p:outputLabel value="Nacimiento:" for="txtNacimiento" />
-					<p:inputText id="txtNacimiento" required="true" style="width:90%"
-                                                     maxlength="8" value="#{controllerUser.user.birth}" />
-                                        
-                                        <p:outputLabel value="Contrasena:" for="txtPassword" />
-					<p:inputText id="txtPassword" required="true" style="width:90%"
-                                                     maxlength="8" value="#{controllerUser.user.password}" />
-					
-					
-					
-				</p:panelGrid>
-				<br></br>
+                        <p:outputLabel value="Direccion:" for="txtDireccion" />
+                        <p:inputText id="txtDireccion" required="true" style="width:90%"
+                                     maxlength="30" value="#{controllerUser.user.address}" />
 
-				<!-- <p:panelGrid id="panGriBusProdTy" columns="3" style="width:100%">
-							<p:outputLabel value="Buscar Por:" for="txtBusPor" />
-							<p:inputText id="txtBusPor" value="#{productTypeController.filter}" />
-							<p:commandButton icon="ui-icon-search"
-								process="@this :frmGen:panGriBusProdTy"
-								actionListener="#{productTypeController.filterProductType()}"
-								update=":frmGen:menGen :frmGen:datTabTipPro :frmGen:panGriBusProdTy" />
-				</p:panelGrid> -->
-				<br></br>
 
-				<p:dataTable id="datTabCus"
-					emptyMessage="No existen usuarios registrados"
-					value="#{controllerUser.users}" var="c" paginator="true"
-					rows="10" selectionMode="single" rowKey="#{c.id}">
-					<f:facet name="header">
-						<p:outputLabel value="Lista de Usuarios" />
-					</f:facet>
-					<p:ajax event="rowSelect"
-						listener="#{controllerUser.selecUser}" />
-					<p:column headerText="Id">
-						<p:outputLabel value="#{c.id}" />
-					</p:column>
-					<p:column headerText="Nombre">
-						<p:outputLabel value="#{c.name}" />
-					</p:column>
-                                        <p:column headerText="Contrasena">
-                                            <p:outputLabel value="#{c.password}" />
-					</p:column>
-					<p:column headerText="Fecha de Nacimiento">
-						<p:outputLabel value="#{c.birth}" />
-					</p:column>
-					<p:column headerText="Direccion">
-						<p:outputLabel value="#{c.address}" />
-					</p:column>
+                        <p:outputLabel for="txtNacimiento" value="Nacimiento:" />
+                        <p:calendar id="txtNacimiento" value="#{controllerUser.user.birth}" pattern="yyyy-MM-dd"  mask="true" />
+                        <p:outputLabel value="Contraseña:" for="txtPassword" />
+                        <p:inputText id="txtPassword" required="true" style="width:90%"
+                                     maxlength="20" value="#{controllerUser.user.password}" />
 
-					
 
-				</p:dataTable>
-			</h:form>
-		</ui:define>
-	</ui:composition>
-</body>
+
+                    </p:panelGrid>
+                    <br></br>
+
+                    <!-- <p:panelGrid id="panGriBusProdTy" columns="3" style="width:100%">
+                                            <p:outputLabel value="Buscar Por:" for="txtBusPor" />
+                                            <p:inputText id="txtBusPor" value="#{productTypeController.filter}" />
+                                            <p:commandButton icon="ui-icon-search"
+                                                    process="@this :frmGen:panGriBusProdTy"
+                                                    actionListener="#{productTypeController.filterProductType()}"
+                                                    update=":frmGen:menGen :frmGen:datTabTipPro :frmGen:panGriBusProdTy" />
+                    </p:panelGrid> -->
+                    <br></br>
+
+                    <p:dataTable id="datTabCus"
+                                 emptyMessage="No existen usuarios registrados"
+                                 value="#{controllerUser.users}" var="c" paginator="true"
+                                 rows="10" selectionMode="single" rowKey="#{c.id}">
+                        <f:facet name="header">
+                            <p:outputLabel value="Lista de Usuarios" />
+                        </f:facet>
+                        <p:ajax event="rowSelect"
+                                listener="#{controllerUser.selecUser}" />
+                        <p:column headerText="Id">
+                            <p:outputLabel value="#{c.id}" />
+                        </p:column>
+                        <p:column headerText="Nombre">
+                            <p:outputLabel value="#{c.name}" />
+                        </p:column>
+                        <p:column headerText="Contrasena">
+                            <p:outputLabel value="#{c.password}" />
+                        </p:column>
+                        <p:column headerText="Fecha de Nacimiento">
+                            <p:outputLabel value="#{c.birth}" />
+                        </p:column>
+                        <p:column headerText="Direccion">
+                            <p:outputLabel value="#{c.address}" />
+                        </p:column>
+
+
+
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
 </html>

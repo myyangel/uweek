@@ -1,18 +1,17 @@
 package com.uweek.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
+import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "user")
@@ -30,8 +29,9 @@ public class User implements Serializable {
 	@Column(name = "address", length = 30, nullable = false)
 	private String address;
 
-	@Column(name = "birth", length = 8, nullable = false)
-	private String birth;
+	@Column(name = "birth", nullable = false)
+        @Temporal (TemporalType.DATE)
+	private Date birth;
         
         @Column (name= "password", length=20, nullable=false)
         private String password;
@@ -61,11 +61,11 @@ public class User implements Serializable {
 		this.address = address;
 	}
 
-	public String getBirth() {
+	public Date getBirth() {
 		return birth;
 	}
 
-	public void setBirth(String birth) {
+	public void setBirth(Date birth) {
 		this.birth = birth;
 	}
         public String getPassword(){

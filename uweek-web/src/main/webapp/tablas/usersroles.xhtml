@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="/WEB-INF/templates/master.xhtml">
+            <ui:define name="pageTitle">Usuario por Role</ui:define>
+            <ui:define name="content">
+                <h:form id="frm">
+                    <p:growl id="men" />
+                    <p:toolbar>
+                        <f:facet name="left">
+                            <p:commandButton value="Nuevo" icon="ui-icon-document"
+                                             actionListener="#{controllerUserRole.clearForm()}" 
+                                             update=":frm:panGriPlato" immediate="true">
+                                <p:resetInput target=":frm:panGriPlato" />
+                            </p:commandButton>
+                            <p:commandButton value="Guardar" icon="ui-icon-disk"
+                                             process="@this :frm:panGriPlato"
+                                             actionListener="#{controllerUserRole.saveUserRole()}"
+                                             update=":frm:men :frm:datTabPlato :frm:panGriPlato" />
+
+                            <p:commandButton value="Editar" icon="ui-icon-pencil"
+                                             process="@this :frm:panGriPlato"
+                                             actionListener="#{controllerUserRole.editUserRole()}"
+                                             update=":frm:men :frm:panGriPlato" 
+                                             immediate="true"/>
+
+                        </f:facet>
+                    </p:toolbar>
+                    <p:panelGrid id="panGriPlato" columns="2" style="width:100%">
+                        <p:outputLabel value="Usuario:" for="cmbUser" />
+                        <p:selectOneMenu id="cmbUser" required="true" effect="drop"
+                                         value="#{controllerUserRole.user}"
+                                         converter="omnifaces.SelectItemsConverter">
+                            <f:selectItem itemLabel="Seleccione una opción"
+                                          noSelectionOption="true" itemValue="" />
+                            <f:selectItems value="#{controllerUserRole.users}"
+                                           var="User" itemLabel="#{User.name}" itemValue="#{User}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Role:" for="cmbRole" />
+                        <p:selectOneMenu id="cmbRole" required="true" effect="drop"
+                                         value="#{controllerUserRole.role}"
+                                         converter="omnifaces.SelectItemsConverter">
+                            <f:selectItem itemLabel="Seleccione una opción"
+                                          noSelectionOption="true" itemValue="" />
+                            <f:selectItems value="#{controllerUserRole.roles}"
+                                           var="Role" itemLabel="#{Role.name}" itemValue="#{Role}" />
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <br></br>
+                    <p:dataTable id="datTabPlato"
+                                 emptyMessage="No existen UsuariosRoles registrados"
+                                 value="#{controllerUserRole.usersRoles}" var="userRole" paginator="true"
+                                 rows="10" selectionMode="single" rowKey="#{userRole.id}">
+                        <f:facet name="header">
+                            <p:outputLabel value="Lista de Usuarios Roles" />
+                        </f:facet>
+                        <p:ajax event="rowSelect"
+                                listener="#{controllerUserRole.selectUserRole}" />
+                        <p:column headerText="id">
+                            <p:outputLabel value="#{userRole.id}" />
+                        </p:column>
+                        <p:column headerText="Usuario">
+                            <p:outputLabel value="#{userRole.user.name}" />
+                        </p:column>
+                        <p:column headerText="Role">
+                            <p:outputLabel value="#{userRole.role.name}" />
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

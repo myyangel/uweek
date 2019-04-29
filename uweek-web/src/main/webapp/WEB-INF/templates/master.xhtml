@@ -1,44 +1,48 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<title><ui:insert name="pageTitle">Page Title</ui:insert></title>
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
-</h:head>
+    <h:head>
+        <title><ui:insert name="pageTitle">Page Title</ui:insert></title>
 
-<body>
-	<ui:insert name="header">
-		<h:form>
-			<p:menubar autoDisplay="false">
+    </h:head>
 
-				<p:submenu label="Mantenimiento" icon="ui-icon-pencil">
-					<p:menuitem icon="ui-icon-document" value="Planes"
-						url="/tablas/plans.xhtml" />
-                                        <p:menuitem icon="ui-icon-document" value="Ingredientes"
-						url="/tablas/ingredients.xhtml" />
-                                        <p:menuitem icon="ui-icon-document" value="Platos"
-						url="/tablas/dishes.xhtml" />
-                                        <p:menuitem icon="ui-icon-document" value="Roles"
-						url="/tablas/roles.xhtml" />
-                                        <p:menuitem icon="ui-icon-document" value="Usuarios"
-						url="/tablas/users.xhtml" />
-				</p:submenu>
+    <body>
+        <ui:insert name="header">
+            <h:form>
+                <p:menubar autoDisplay="false">
 
-			</p:menubar>
-		</h:form>
-	</ui:insert>
+                    <p:submenu label="Mantenimiento" icon="ui-icon-pencil">
+                        <p:menuitem icon="ui-icon-document" value="Planes"
+                                    url="/tablas/plans.xhtml" />
+                        <p:menuitem icon="ui-icon-document" value="Ingredientes"
+                                    url="/tablas/ingredients.xhtml" />
+                        <p:menuitem icon="ui-icon-document" value="Platos"
+                                    url="/tablas/dishes.xhtml" />
+                        <p:menuitem icon="ui-icon-document" value="Roles"
+                                    url="/tablas/roles.xhtml" />
+                        <p:menuitem icon="ui-icon-document" value="Usuarios"
+                                    url="/tablas/users.xhtml" />
+                        <p:menuitem icon="ui-icon-document" value="Permisos"
+                                    url="/tablas/permissions.xhtml" />
+                        <p:menuitem icon="ui-icon-document" value="Usuarios Roles"
+                                    url="/tablas/usersroles.xhtml" />
+                    </p:submenu>
 
-	<ui:insert name="content">
+                </p:menubar>
+            </h:form>
+        </ui:insert>
 
-	</ui:insert>
+        <ui:insert name="content">
+
+        </ui:insert>
 
 
-	<ui:insert name="footer">
-		<div>Copyright © uWeek, 2019. Todos los derechos reservados</div>
-	</ui:insert>
-</body>
+        <ui:insert name="footer">
+            <div>Copyright © uWeek, 2019. Todos los derechos reservados</div>
+        </ui:insert>
+    </body>
 
 </html>
