@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <body>
+        
+        <ui:composition template="/WEB-INF/templates/master.xhtml">
+            <ui:define name="pageTitle">Alergias del usuario</ui:define>
+            <ui:define name="content">
+                <h:form id="frm">
+                    <p:growl id="men" />
+                    <p:toolbar>
+                        <f:facet name="left">
+                            
+                            <p:commandButton value="Nuevo" icon="ui-icon-document"
+                                             actionListener="#{controllerAllergy.clearForm()}" 
+                                             update=":frm:panGriAlergia" immediate="true">
+                                <p:resetInput target=":frm:panGriAlergia" />
+                            </p:commandButton>
+                            <p:commandButton value="Guardar" icon="ui-icon-disk"
+                                             process="@this :frm:panGriAlergia"
+                                             actionListener="#{controllerAllergy.saveAllergy()}"
+                                             update=":frm:men :frm:datTabAlergia :frm:panGriAlergia" />
+
+                            <p:commandButton value="Editar" icon="ui-icon-pencil"
+                                             process="@this :frm:panGriAlergia"
+                                             actionListener="#{controllerAllergy.editAllergy()}"
+                                             update=":frm:men :frm:panGriAlergia" 
+                                             immediate="true"/>
+                            
+                        </f:facet>
+                    </p:toolbar>
+                    
+                    <p:panelGrid id="panGriAlergia" columns="2" style="width:100%">
+                        <p:outputLabel value="Usuario:" for="cmbUser" />
+                        <p:selectOneMenu id="cmbUser" required="true" effect="drop"
+                                         value="#{controllerAllergy.user}"
+                                         converter="omnifaces.SelectItemsConverter">
+                            <f:selectItem itemLabel="Seleccione una opción"
+                                          noSelectionOption="true" itemValue="" />
+                            <f:selectItems value="#{controllerAllergy.users}"
+                                           var="User" itemLabel="#{User.name}" itemValue="#{User}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Ingredient:" for="cmbIngrediente" />
+                        <p:selectOneMenu id="cmbIngrediente" required="true" effect="drop"
+                                         value="#{controllerAllergy.ingredient}"
+                                         converter="omnifaces.SelectItemsConverter">
+                            <f:selectItem itemLabel="Seleccione una opción"
+                                          noSelectionOption="true" itemValue="" />
+                            <f:selectItems value="#{controllerAllergy.ingredients}"
+                                           var="Ingredient" itemLabel="#{Ingredient.name}" itemValue="#{Ingredient}" />
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <br></br>
+                    <p:dataTable id="datTabAlergia"
+                                 emptyMessage="No existen Alergias registradas"
+                                 value="#{controllerAllergy.allergies}" var="allergy" paginator="true"
+                                 rows="10" selectionMode="single" rowKey="#{allergy.id}">
+                        <f:facet name="header">
+                            <p:outputLabel value="Lista de Alergias" />
+                        </f:facet>
+                        <p:ajax event="rowSelect"
+                                listener="#{controllerAllergy.selectAllergy}" />
+                        <p:column headerText="id">
+                            <p:outputLabel value="#{allergy.id}" />
+                        </p:column>
+                        <p:column headerText="Usuario">
+                            <p:outputLabel value="#{allergy.user.name}" />
+                        </p:column>
+                        <p:column headerText="Ingrediente">
+                            <p:outputLabel value="#{allergy.ingredient.name}" />
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body> 
+</html>
